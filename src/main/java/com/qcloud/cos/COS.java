@@ -612,6 +612,22 @@ public interface COS extends COSDirectSpi {
      */
     public Bucket createBucket(String bucketName) throws CosClientException, CosServiceException;
 
+    /**
+     * <p>
+     * 为高性能桶换取临时数据密钥（session）。该接口本身使用用户的长期凭证加签，
+     * 返回的临时密钥用于对象级 / 分块级接口。SDK 内部已自动管理密钥的缓存与刷新，通常无需手动调用。
+     * SDK 通过桶名自动识别高性能桶（桶名匹配 {@code *-x--<appid>} 规则）。
+     * </p>
+     *
+     * @param createSessionRequest 换取 session 的请求
+     * @return CreateSession 结果，含临时数据密钥与过期时间
+     * @throws CosClientException  If any errors are encountered in the client while making the
+     *                             request or handling the response.
+     * @throws CosServiceException If any errors occurred in while processing the request.
+     */
+    public CreateSessionResult createSession(CreateSessionRequest createSessionRequest)
+            throws CosClientException, CosServiceException;
+
 
     /**
      * <p>

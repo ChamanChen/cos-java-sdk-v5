@@ -336,4 +336,14 @@ public interface Headers {
     public static final String SYMLINK_TARGET = "x-cos-symlink-target";
 
     public static final String INODE_ID = "x-cos-inode-id";
+
+    /**
+     * cos-rapid 高性能桶 RenameObject 请求头，指定源对象路径，格式为 /<SourceObjectKey>。
+     */
+    public static final String COS_RENAME_SOURCE = "x-cos-rename-source";
+
+    /**
+     * cos-rapid 高性能桶 RenameObject 请求头，指定是否禁止覆盖目标路径上的同名文件对象。
+     */
+    public static final String COS_RENAME_FORBID_OVERWRITE = "x-cos-forbid-overwrite";
 }

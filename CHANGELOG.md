@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [5.6.261]
+- add COS Rapid Bucket (high-performance bucket) session auth support: `RapidSessionManager` auto completes `CreateSession`, caches/reuses session credentials, and auto re-signs when the underlying long-term credentials (SecretId/SecretKey, STS, CVM Role, etc.) change
+- `RapidSessionManager` caches session credentials per bucket; enable rapid bucket by `ClientConfig.setRapidBucket(true)`, no transport wrapping needed
+- rapid presigned URL support: `COSClient.generatePresignedUrl` automatically uses session credentials when bucket name matches rapid bucket pattern (*-x--<appid>)
+- add `CreateSession` API to fetch temporary session credentials for rapid buckets
+
+
 ## [5.6.259]
 - FileHashSync
 - AIObjectDetect

@@ -11,7 +11,7 @@
  * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
- 
+
  * According to cos feature, we modify some class，comment, field name, etc.
  */
 
@@ -56,11 +56,11 @@ public class Region implements Serializable {
         }
         return false;
     }
-    
+
     public static String formatRegion(Region region) throws CosClientException {
         return formatRegion(region.getRegionName());
     }
-    
+
     public static String formatRegion(String regionName) throws CosClientException {
         UrlComponentUtils.validateRegionName(regionName);
         if (regionName.startsWith("cos.")) {
@@ -73,6 +73,20 @@ public class Region implements Serializable {
             } else {
                 return "cos." + regionName;
             }
+        }
+    }
+
+    /** 高性能桶域名使用纯 region（不带 cosrapid. 前缀），如 ap-nanjing */
+    public static String formatRapidRegion(Region region) throws CosClientException {
+        return formatRapidRegion(region.getRegionName());
+    }
+
+    public static String formatRapidRegion(String regionName) throws CosClientException {
+        UrlComponentUtils.validateRegionName(regionName);
+        if (regionName.startsWith("cosrapid.")) {
+            return regionName;
+        } else {
+            return "cosrapid." + regionName;
         }
     }
 
