@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.qcloud.cos.Headers;
 import com.qcloud.cos.exception.CosClientException;
@@ -733,7 +734,7 @@ public class ObjectMetadata extends CosServiceResult implements ServerSideEncryp
 
     public ObjectMetadata() {
         userMetadata = new HashMap<String, String>();
-        metadata = new HashMap<String, Object>();
+        metadata = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         isFileModeDir = false;
     }
 
@@ -741,7 +742,10 @@ public class ObjectMetadata extends CosServiceResult implements ServerSideEncryp
         // shallow clone the internal hash maps
         userMetadata =
                 from.userMetadata == null ? null : new HashMap<String, String>(from.userMetadata);
-        metadata = from.metadata == null ? null : new HashMap<String, Object>(from.metadata);
+        if (from.metadata != null) {
+            metadata = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+            metadata.putAll(from.metadata);
+        }
         this.expirationTime = from.expirationTime;
         this.expirationTimeRuleId = from.expirationTimeRuleId;
         this.httpExpiresDate = from.httpExpiresDate;

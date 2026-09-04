@@ -1,5 +1,6 @@
 package com.qcloud.cos.model;
 
+import com.qcloud.cos.Headers;
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.http.CosHttpResponse;
 import com.qcloud.cos.internal.AbstractCosResponseHandler;
@@ -24,7 +25,7 @@ public class CreateSessionResultHandler extends AbstractCosResponseHandler<Creat
 
     @Override
     public CosServiceResponse<CreateSessionResult> handle(CosHttpResponse response) throws Exception {
-        String requestId = response.getHeaders().get("x-cos-request-id");
+        String requestId = response.getHeaders().get(Headers.REQUEST_ID);
 
         CreateSessionResult result = new CreateSessionResult();
         result.setRequestId(requestId);

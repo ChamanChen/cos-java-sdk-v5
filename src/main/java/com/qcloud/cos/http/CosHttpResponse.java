@@ -19,8 +19,8 @@
 package com.qcloud.cos.http;
 
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.http.client.methods.HttpRequestBase;
 
@@ -33,7 +33,7 @@ public class CosHttpResponse {
     private String statusText;
     private int statusCode;
     private InputStream content;
-    private Map<String, String> headers = new HashMap<String, String>();
+    private Map<String, String> headers = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
     public CosHttpResponse(CosHttpRequest<?> request, HttpRequestBase httpRequest) {
         super();
